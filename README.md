@@ -10,10 +10,25 @@ iniparser gem -  read / parse INI configuration, setttings and data files into a
 
 
 
+
 ## Usage - `INI.load`, `INI.load_file`
 
-Use `INI.load` or `INI.load_file`. Example:
 
+Opt 1) `INI.load` - load from string. Example:
+
+``` ruby
+text   = File.read( './planet.ini' )
+hash = INI.load( text )
+```
+
+Opt 2) `INI.load_file` - load from file (shortcut). Example:
+
+``` ruby
+hash = INI.load_file( './planet.ini' )
+```
+
+
+All together now. Example:
 
 ``` ruby
 require 'iniparser'
