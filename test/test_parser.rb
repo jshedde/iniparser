@@ -48,4 +48,23 @@ TXT
     assert_equal 'A rose is a rose is a rose, eh?', hash['http://example.com']['title3']
   end
 
+  def test_load_array
+
+    text = <<TXT
+   [section1]
+   key[] = value0
+   key[] = value1
+   key2[subkey] = value
+   key2[] = value1
+TXT
+
+    hash = INI.load( text )
+    pp hash
+
+    assert_equal 'value0', hash['section1']['key'][0]
+    assert_equal 'value1', hash['section1']['key'][1]
+    assert_equal 'value',  hash['section1']['key2']['subkey']
+    assert_equal 'value1', hash['section1']['key2'][1]
+  end
+
 end

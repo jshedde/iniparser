@@ -73,6 +73,23 @@ class IniParser
         value = $2.to_s.strip.dup   # check if it can be nil? if yes use blank string e.g. ''
         ### todo:  strip quotes from value??? why? why not?
         hash[ key ] = value
+      elsif line =~ /^\s*([a-z0-9_\-]+)\[([a-z0-9_\-]*)\]\s*[:=](.*)$/
+        key   = $1.to_s.dup
+        subkey = $2.to_s.dup
+        value = $3.to_s.strip.dup   # check if it can be nil? if yes use blank string e.g. ''
+        if hash.key?(key) && hash[key].kind_of?(Hash)
+          puts('TODO')
+          if subkey.length == 0
+            subkey = hash[key].length
+          end
+          hash[ key ][subkey] = value
+        else
+          hash[ key ] = Hash.new
+          if subkey.length == 0
+            subkey = 0
+          end
+          hash[ key ][subkey] = value
+        end
       else
         puts "*** warn: skipping unknown line type in ini >#{line}<"
       end
