@@ -78,7 +78,6 @@ class IniParser
         subkey = $2.to_s.dup
         value = $3.to_s.strip.dup   # check if it can be nil? if yes use blank string e.g. ''
         if hash.key?(key) && hash[key].kind_of?(Hash)
-          puts('TODO')
           if subkey.length == 0
             subkey = hash[key].length
           end
